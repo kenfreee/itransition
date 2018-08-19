@@ -1,0 +1,6 @@
+services:
+    app.domain_stock_repository.stock_repository:
+        class: AppBundle\Domain\Stock\Repository\StockRepository
+        factory: ["@app.services.repository_factory", getRepository]
+        arguments: ['AppBundle\Domain\Stock\Model\Stock']
+        public: true

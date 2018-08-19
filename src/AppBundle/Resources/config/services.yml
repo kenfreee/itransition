@@ -1,0 +1,7 @@
+imports:
+    - { resource: Stock/stock.yml }
+
+services:
+    app.services.repository_factory:
+        class: AppBundle\Services\RepositoryFactory
+        arguments: ['@service_container']

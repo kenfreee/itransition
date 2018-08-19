@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: itransition
+
+  php_cli:
+    build: ./.docker/php-cli
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    volumes:
+      - ./:/var/www/importer_csv
+    environment:
+        XDEBUG_CONFIG: remote_host=172.19.0.1
+        PHP_IDE_CONFIG: serverName=importer_csv
+    tty: true
+
+volumes:
+   mysql_db:
